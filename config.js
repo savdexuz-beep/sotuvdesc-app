@@ -1,0 +1,1 @@
+window.SD_CONFIG = window.SD_CONFIG || { url: "https://xprotusvwqzngxxpysrm.supabase.co", key: "sb_publishable_Tj3r1VPrENa0uqriwv9ISA_cfs-Rv4E", web: "https://savdexuz-beep.github.io/sotuvdesc-app" };

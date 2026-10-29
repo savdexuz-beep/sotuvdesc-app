@@ -1,0 +1,218 @@
+{
+ "_meta": {
+  "version": "1.0",
+  "date": "2026-10-27",
+  "author": "агент Рустам (продажи)",
+  "status": "черновик: узбекский текст вычитать носителем перед предзагрузкой клиентам",
+  "format": "{ru|uz: {<stage_key>: {goal, steps[], call, msg}, objections: [{q, a}]}}",
+  "stage_order": ["new", "contacted", "interest", "meeting", "proposal", "won", "lost"],
+  "stage_names": {
+   "ru": {"new": "Новый", "contacted": "Связались", "interest": "Интерес", "meeting": "Встреча/демо", "proposal": "Предложение", "won": "Сделка", "lost": "Отказ"},
+   "uz": {"new": "Yangi", "contacted": "Bog‘lanildi", "interest": "Qiziqish", "meeting": "Uchrashuv/demo", "proposal": "Taklif", "won": "Bitim", "lost": "Rad etildi"}
+  },
+  "stage_note": "Ключи совпадают с STATUSES в app.js и st_* в i18n.js. «Сделка»/«Отказ» = выиграно/проиграно (kind won/lost). Привязка к этапам воронки компании: по порядку (индекс 0..6) или по kind, если этапы переименованы.",
+  "placeholders": {
+   "{я}": "имя менеджера (приложение подставляет myName())",
+   "{компания}": "название вашей компании",
+   "{продукт}": "что вы предлагаете",
+   "{имя}": "обращение к клиенту: Имя Отчество (RU) или Имя + aka/opa (UZ)",
+   "{клиент}": "название компании клиента",
+   "{контакт}": "ваш телефон или @Telegram",
+   "{день}": "день недели или дата",
+   "{время}": "время",
+   "[...]": "квадратные скобки менеджер заменяет сам, по ситуации клиента"
+  },
+  "load_hint": "Карточки: kind='script' на этап (stage_id по порядку), 3 штуки: plan (goal + steps списком), call, msg, заголовки из card_titles; kind='objection', stage_id=null: q как title, a как body. lang='ru'|'uz'. sort: plan 0, call 1, msg 2; возражения по порядку.",
+  "card_titles": {
+   "ru": {"plan": "Этап: цель и шаги", "call": "Скрипт звонка", "msg": "Сообщение в WhatsApp/Telegram"},
+   "uz": {"plan": "Bosqich: maqsad va qadamlar", "call": "Qo‘ng‘iroq ssenariysi", "msg": "WhatsApp/Telegram xabari"}
+  },
+  "limits": {"call_max_words": 60, "msg_max_words": 80}
+ },
+ "ru": {
+  "new": {
+   "goal": "Познакомиться и понять, тот ли это человек и есть ли у компании задача, с которой вы можете помочь. Цель не продать, а договориться о следующем коротком разговоре.",
+   "steps": [
+    "Перед контактом потратьте 2 минуты: чем занимается компания, что она продаёт или закупает, кто в ней решает. Это есть в карточке, на сайте или в соцсетях компании.",
+    "Начните со звонка или короткого сообщения в WhatsApp или Telegram. Не звоните несколько раз подряд: после недозвона отправьте одно сообщение.",
+    "В первых словах назовите себя, компанию и причину обращения, спросите, удобно ли сейчас говорить.",
+    "Запишите в карточке итог и следующий шаг с датой. Переносите на «Связались», когда поговорили с тем, кто решает, или получили его контакт."
+   ],
+   "call": "Здравствуйте, {имя}! Меня зовут {я}, компания {компания}. Звоню по поводу {продукт}. Подскажите, пожалуйста, кто у вас занимается такими вопросами? Если сейчас неудобно, скажите, когда перезвонить, и я перезвоню в это время.",
+   "msg": "{имя}, здравствуйте! Я {я} из {компания}. Увидел, что {клиент} занимается [чем именно], поэтому пишу по поводу {продукт}. Не буду отнимать время: расскажу коротко, когда вам будет удобно. Если неактуально, просто ответьте «нет». Подскажите, кто у вас решает такие вопросы?"
+  },
+  "contacted": {
+   "goal": "Выяснить ситуацию клиента и понять, подходит ли ему ваш продукт. Сначала вопросы, потом предложение.",
+   "steps": [
+    "Задайте 1–2 вопроса о текущей ситуации: как задача решается сейчас, с кем работают, что устраивает и что нет. По одному вопросу за раз, больше слушайте.",
+    "Узнайте, кто принимает решение и нужно ли согласование с руководителем или партнёром.",
+    "Уточните сроки: когда задача должна быть решена и что будет, если оставить всё как есть.",
+    "Запишите ответы клиента его словами. Переносите на «Интерес», когда клиент сам назвал задачу или попросил подробности."
+   ],
+   "call": "{имя}, спасибо, что нашли время. Чтобы не говорить лишнего, спрошу: как у вас сейчас решается эта задача, что в этом устраивает, а что вы бы изменили?",
+   "msg": "{имя}, добрый день! Спасибо за разговор. Как договорились, пишу коротко: вы сказали, что [задача клиента его словами]. Чтобы предложить именно то, что подходит, уточню одно: что в нынешнем варианте вам неудобно больше всего?"
+  },
+  "interest": {
+   "goal": "Убедиться, что задача важна для клиента, и договориться о встрече или демо, где вы покажете решение на его примере.",
+   "steps": [
+    "Повторите задачу клиента своими словами и спросите, верно ли вы поняли.",
+    "Спросите о последствиях: что теряется, если ничего не менять (время, деньги, клиенты). Пусть это скажет сам клиент, а не вы.",
+    "Свяжите его задачу с вашим решением одной-двумя фразами. Цену пока не называйте.",
+    "Предложите встречу или демо на два конкретных времени, а не «когда вам удобно». Внесите в календарь и поставьте задачу-напоминание."
+   ],
+   "call": "{имя}, если я правильно понял, у вас так: [задача своими словами]. Предлагаю коротко показать на вашем примере, как это можно решить. Вам удобнее {день} или {день}?",
+   "msg": "{имя}, как договорились: [задача клиента]. Я правильно записал? Если да, предлагаю коротко встретиться или созвониться и показать решение на вашем примере. Вам подойдёт {день} в {время} или {день} в {время}?"
+  },
+  "meeting": {
+   "goal": "Показать решение на примере клиента, а не перечислять все возможности, и получить согласие на предложение с цифрами.",
+   "steps": [
+    "Заранее подготовьте пример из жизни клиента, проверьте, что всё работает, и узнайте, кто будет на встрече.",
+    "Начните с короткой повестки и вопроса, что для клиента самое важное сегодня. Показывайте только то, что связано с его задачей.",
+    "Говорите не больше половины времени. После каждого блока спрашивайте: «Это решает вашу задачу?»",
+    "В конце договоритесь о следующем шаге: что вы отправите, когда и кто решает. Запишите в карточку. Переносите на «Предложение», когда клиент согласился получить расчёт."
+   ],
+   "call": "Здравствуйте, {имя}! Напоминаю о нашей встрече {день} в {время}. Чтобы она была полезной, скажите: что для вас сейчас важнее всего увидеть? Я подготовлю всё под это.",
+   "msg": "{имя}, спасибо за время. Коротко, что мы обсудили: [1–2 пункта со слов клиента]. Следующий шаг: я подготовлю расчёт и отправлю до {день}. Всё ли я учёл или чего-то не хватает?"
+  },
+  "proposal": {
+   "goal": "Отправить понятное предложение, разобрать его с клиентом лично и получить решение или честную причину, почему решения нет.",
+   "steps": [
+    "Соберите предложение вокруг задачи клиента: что он получит, из чего складывается цена, сроки и условия. Цены и условия берите только из актуального прайса, чего не знаете, уточните у руководителя.",
+    "Не отправляйте предложение молча: договоритесь о звонке, где вы разберёте его вместе.",
+    "Спросите, кто ещё должен согласовать, и предложите ответить на вопросы этих людей.",
+    "Если клиент молчит, через 2–3 дня напишите что-то полезное (ответ на вопрос, пример), а не «напоминаем». После 2–3 касаний без ответа спросите прямо, актуально ли."
+   ],
+   "call": "{имя}, добрый день! Отправил вам предложение. Давайте разберём его вместе: подходят ли состав и сроки, остались ли вопросы по условиям? Что вы бы изменили?",
+   "msg": "{имя}, добрый день! Отправляю предложение по {продукт}: в нём [что вы получите], сроки и условия. Если удобно, разберу его с вами по телефону, так быстрее ответим на все вопросы. Когда вам удобно созвониться?"
+  },
+  "won": {
+   "goal": "Закрепить договорённости письменно, без потерь передать клиента на выполнение и сохранить хорошие отношения.",
+   "steps": [
+    "Подтвердите клиенту письменно, что именно согласовано: состав, сроки, оплата, контактное лицо.",
+    "Передайте клиента тем, кто выполняет заказ, с короткой запиской из карточки: задача клиента, обещания, особенности.",
+    "Назначьте контрольный контакт после начала работ, чтобы спросить, всё ли идёт как договорились.",
+    "Поблагодарите. Когда клиент доволен, спросите, нет ли знакомых, кому это может быть полезно. Без давления."
+   ],
+   "call": "{имя}, добрый день! Хочу сказать спасибо за доверие. Подтверждаю: мы договорились о [договорённости]. Следующий шаг: [шаг и срок]. Всё ли верно, не упустили ли мы что-то?",
+   "msg": "{имя}, спасибо за доверие! Фиксирую договорённости: [состав], [сроки], [контактное лицо]. Если что-то записано неточно, поправьте, пожалуйста. По любым вопросам мы на связи. Всё ли верно?"
+  },
+  "lost": {
+   "goal": "Узнать настоящую причину отказа, записать её в карточку и оставить хорошее впечатление, чтобы к вам могли вернуться.",
+   "steps": [
+    "Не спорьте и не уговаривайте. Поблагодарите за ответ.",
+    "Один раз спросите о причине: цена, сроки, нет задачи, выбрали другого, нет доверия. Если клиент не хочет отвечать, не настаивайте.",
+    "Запишите причину его словами в поле «причина отказа» в карточке: по ней потом видно, что нужно менять.",
+    "Оставьте дверь открытой одним сообщением и больше не пишите, если клиент не попросил. Тем, кто просил не писать, не пишите вовсе. Если клиент сам назвал срок возврата, поставьте задачу на эту дату."
+   ],
+   "call": "{имя}, спасибо, что сказали прямо. Можно один вопрос, чтобы я понимал, что нам улучшить: что стало главной причиной? Если не хотите отвечать, это нормально.",
+   "msg": "{имя}, спасибо за время и честный ответ. Если задача снова станет актуальной, мы на связи: {я}, {контакт}. Удачи в делах! Если не секрет, что больше всего повлияло на ваше решение?"
+  },
+  "objections": [
+   {"q": "Дорого", "a": "Понимаю, цена важна. С чем вы сравниваете: с другим предложением или с бюджетом, который закладывали? Давайте разберём, из чего складывается цена, и посмотрим, можно ли начать с меньшего объёма."},
+   {"q": "Мы подумаем", "a": "Конечно, спешить не нужно. Что именно вы хотите обдумать: цену, сроки или условия? Скажите, и я подготовлю ответ именно на это, а к разговору мы вернёмся в удобный для вас день."},
+   {"q": "Скиньте в Telegram (или в WhatsApp)", "a": "Конечно, отправлю сегодня. Чтобы не слать лишнего, уточню: что вам важнее увидеть, цену, условия или примеры? Пришлю коротко именно про это и спрошу, всё ли понятно."},
+   {"q": "У нас уже есть поставщик", "a": "Хорошо, значит вопрос для вас важен. Что в нынешнем варианте устраивает, а что хотелось бы улучшить? Менять ничего не нужно: можно просто сравнить условия, чтобы у вас был запасной вариант."},
+   {"q": "Нет времени", "a": "Понимаю, времени мало. Поэтому займу минимум: два вопроса, и вы сами решите, продолжать ли. Либо я коротко напишу в мессенджер, а вы ответите, когда будет минута. Как вам удобнее?"},
+   {"q": "Позвоните позже", "a": "Хорошо, не буду отвлекать. Когда именно вам удобно: сегодня после обеда или завтра утром? Я поставлю напоминание и позвоню в это время."},
+   {"q": "Отправьте КП", "a": "Конечно. Чтобы предложение попало в цель, мне нужно уточнить два момента: что именно и в каком объёме вам нужно и кто принимает решение. Ответите? После этого отправлю КП и разберу его с вами по телефону."},
+   {"q": "Нам это не нужно", "a": "Понял, спасибо, что сказали прямо. Один вопрос: как эта задача решается у вас сейчас? Если всё устраивает, настаивать не буду, просто оставлю свой контакт на случай, если что-то изменится."},
+   {"q": "Надо посоветоваться с руководителем", "a": "Конечно, такие решения принимают вместе. Как вы думаете, что руководитель спросит первым? Если хотите, подготовлю короткую справку или подключусь к вашему разговору, чтобы ответить на его вопросы."},
+   {"q": "Мы вас не знаем", "a": "Вы правы, что осторожны: мы пока не знакомы. Что вам важно узнать о нас, чтобы вы могли доверять? Расскажу, как мы работаем, отвечу на любые вопросы и предложу небольшой первый шаг без больших обязательств."},
+   {"q": "У других дешевле", "a": "Спасибо, что сказали. Что именно дешевле: итоговая цена или отдельные позиции? Давайте сравним по пунктам, что входит в цену, сроки и условия: так будет видно, одинаковые ли это предложения. Если мы действительно дороже, я скажу об этом прямо."},
+   {"q": "Сейчас нет бюджета", "a": "Понимаю, бюджет бывает не всегда. Когда, по вашим планам, он может появиться? Сейчас настаивать не буду, вернусь к разговору в это время, а полезные материалы могу прислать без обязательств."}
+  ]
+ },
+ "uz": {
+  "new": {
+   "goal": "Tanishish va suhbatdosh to‘g‘ri odam ekanini hamda kompaniyada sizning mahsulotingiz yordam bera oladigan vazifa bor-yo‘qligini aniqlash. Maqsad sotish emas, keyingi qisqa suhbatga kelishish.",
+   "steps": [
+    "Aloqadan oldin 2 daqiqa ajrating: kompaniya nima bilan shug‘ullanadi, nima sotadi yoki sotib oladi, qarorni kim qabul qiladi. Bu ma’lumotlar kartochkada, kompaniya saytida yoki ijtimoiy tarmoqlarida bor.",
+    "Qo‘ng‘iroq yoki WhatsApp, Telegram’dagi qisqa xabar bilan boshlang. Ketma-ket qo‘ng‘iroq qilmang: javob bo‘lmasa, bitta xabar yozing.",
+    "Birinchi so‘zlardayoq o‘zingizni, kompaniyangizni va murojaat sababini ayting, hozir gaplashish qulaymi, deb so‘rang.",
+    "Kartochkaga natija va keyingi qadamni sana bilan yozing. Qaror qabul qiladigan odam bilan gaplashgach yoki uning kontaktini olgach, «Bog‘lanildi» bosqichiga o‘tkazing."
+   ],
+   "call": "Assalomu alaykum, {имя}! Ismim {я}, {компания} kompaniyasidan. {продукт} bo‘yicha qo‘ng‘iroq qilyapman. Ayting-chi, bunday masalalar bilan sizda kim shug‘ullanadi? Hozir noqulay bo‘lsa, qachon qayta qo‘ng‘iroq qilishni ayting, o‘sha vaqtda qo‘ng‘iroq qilaman.",
+   "msg": "Assalomu alaykum, {имя}! Men {я}, {компания} kompaniyasidanman. {клиент} [aynan nima bilan] shug‘ullanishini ko‘rdim, shuning uchun {продукт} bo‘yicha yozyapman. Vaqtingizni olmayman: qulay payt bo‘lganda qisqacha aytib beraman. Dolzarb bo‘lmasa, shunchaki «yo‘q» deb javob bering. Bunday masalalarni sizda kim hal qiladi?"
+  },
+  "contacted": {
+   "goal": "Mijozning vaziyatini aniqlash va mahsulotingiz unga mos kelishini tushunish. Avval savollar, keyin taklif.",
+   "steps": [
+    "Hozirgi vaziyat haqida 1–2 ta savol bering: vazifa hozir qanday hal qilinadi, kim bilan ishlashadi, nima qoniqtiradi va nima yo‘q. Bir vaqtda bitta savol, ko‘proq tinglang.",
+    "Qarorni kim qabul qilishini va rahbar yoki sherik bilan kelishish kerakmi, bilib oling.",
+    "Muddatlarni aniqlang: vazifa qachon hal bo‘lishi kerak va hammasi shundayligicha qolsa, nima bo‘ladi.",
+    "Mijozning javoblarini uning o‘z so‘zlari bilan yozib qo‘ying. Mijoz vazifani o‘zi aytsa yoki batafsil ma’lumot so‘rasa, «Qiziqish» bosqichiga o‘tkazing."
+   ],
+   "call": "{имя}, vaqt ajratganingiz uchun rahmat. Ortiqcha gapirmaslik uchun so‘rayman: bu vazifa sizda hozir qanday hal qilinadi, nimasi qoniqtiradi va nimani o‘zgartirgan bo‘lardingiz?",
+   "msg": "Assalomu alaykum, {имя}! Suhbat uchun rahmat. Kelishganimizdek, qisqa yozaman: siz [mijozning vazifasi o‘z so‘zlari bilan] deb aytdingiz. Aynan sizga mos narsani taklif qilish uchun bittasini aniqlashtiray: hozirgi variantda sizga eng noqulayi nima?"
+  },
+  "interest": {
+   "goal": "Vazifa mijoz uchun muhim ekaniga ishonch hosil qilish va yechimni uning misolida ko‘rsatadigan uchrashuv yoki demoga kelishish.",
+   "steps": [
+    "Mijoz vazifasini o‘z so‘zlaringiz bilan takrorlang va to‘g‘ri tushunganingizni so‘rang.",
+    "Oqibatlari haqida so‘rang: hech narsani o‘zgartirmasa, nima yo‘qotiladi (vaqt, pul, mijozlar). Buni siz emas, mijozning o‘zi aytsin.",
+    "Uning vazifasini sizning yechimingiz bilan bir-ikki jumlada bog‘lang. Narxni hozircha aytmang.",
+    "Uchrashuv yoki demoni «qachon qulay?» deb emas, ikkita aniq vaqt bilan taklif qiling. Kalendarga yozing va eslatma-vazifa qo‘ying."
+   ],
+   "call": "{имя}, to‘g‘ri tushungan bo‘lsam, sizda shunday: [vazifa o‘z so‘zlarim bilan]. Bu qanday hal qilinishini sizning misolingizda qisqacha ko‘rsatishni taklif qilaman. Sizga {день} qulaymi yoki {день}?",
+   "msg": "{имя}, kelishganimizdek: [mijozning vazifasi]. To‘g‘ri yozdimmi? Shunday bo‘lsa, qisqacha uchrashib yoki telefonda gaplashib, yechimni sizning misolingizda ko‘rsatishni taklif qilaman. Sizga {день} kuni soat {время} yoki {день} kuni soat {время} to‘g‘ri keladimi?"
+  },
+  "meeting": {
+   "goal": "Yechimni barcha imkoniyatlarni sanab emas, mijoz misolida ko‘rsatish va raqamlar bilan taklif olishga rozilik olish.",
+   "steps": [
+    "Oldindan mijoz hayotidan misol tayyorlang, hammasi ishlashini tekshiring va uchrashuvda kimlar qatnashishini bilib oling.",
+    "Qisqa reja va savol bilan boshlang: bugun mijoz uchun eng muhimi nima? Faqat uning vazifasiga tegishli narsani ko‘rsating.",
+    "Vaqtning yarmidan ko‘pini o‘zingiz gapirmang. Har bir blokdan keyin so‘rang: «Bu sizning vazifangizni hal qiladimi?»",
+    "Oxirida keyingi qadamni kelishing: nima yuborasiz, qachon va qarorni kim qabul qiladi. Kartochkaga yozing. Mijoz hisob-kitob olishga rozi bo‘lsa, «Taklif» bosqichiga o‘tkazing."
+   ],
+   "call": "Assalomu alaykum, {имя}! {день} kuni soat {время} dagi uchrashuvimizni eslatib o‘tmoqchiman. U foydali bo‘lishi uchun ayting: hozir sizga nimani ko‘rish eng muhim? Hammasini shunga moslab tayyorlayman.",
+   "msg": "{имя}, vaqt ajratganingiz uchun rahmat. Muhokama qilganlarimiz: [mijoz so‘zlari bilan 1–2 band]. Keyingi qadam: hisob-kitobni tayyorlab, {день} gacha yuboraman. Hammasini hisobga oldimmi yoki nimadir yetishmayaptimi?"
+  },
+  "proposal": {
+   "goal": "Tushunarli taklif yuborish, uni mijoz bilan shaxsan ko‘rib chiqish va qaror yoki qaror yo‘qligining halol sababini olish.",
+   "steps": [
+    "Taklifni mijoz vazifasi atrofida tuzing: u nima oladi, narx nimadan iborat, muddatlar va shartlar. Narx va shartlarni faqat amaldagi narxnomadan oling, bilmaganingizni rahbardan so‘rab aniqlang.",
+    "Taklifni indamay yubormang: uni birga ko‘rib chiqadigan qo‘ng‘iroqqa kelishing.",
+    "Yana kim kelishishi kerakligini so‘rang va ularning savollariga javob berishni taklif qiling.",
+    "Mijoz jim bo‘lsa, 2–3 kundan keyin foydali narsa bilan yozing (savolga javob, misol), «eslatib o‘tamiz» deb emas. 2–3 aloqadan keyin ham javob bo‘lmasa, dolzarbligini to‘g‘ridan-to‘g‘ri so‘rang."
+   ],
+   "call": "Assalomu alaykum, {имя}! Taklifni sizga yubordim. Keling, birga ko‘rib chiqamiz: tarkibi va muddatlari mos keladimi, shartlar bo‘yicha savollar qoldimi? Nimani o‘zgartirgan bo‘lardingiz?",
+   "msg": "Assalomu alaykum, {имя}! {продукт} bo‘yicha taklifni yuboryapman: unda [nima olasiz], muddatlar va shartlar bor. Qulay bo‘lsa, telefonda birga ko‘rib chiqaylik, shunda savollarga tezroq javob beramiz. Qachon gaplashsak bo‘ladi?"
+  },
+  "won": {
+   "goal": "Kelishuvlarni yozma mustahkamlash, mijozni yo‘qotishlarsiz ijrochilarga topshirish va yaxshi munosabatni saqlash.",
+   "steps": [
+    "Mijozga yozma tasdiqlang, aynan nima kelishilgan: tarkib, muddatlar, to‘lov, mas’ul shaxs.",
+    "Mijozni buyurtmani bajaradiganlarga kartochkadan olingan qisqa eslatma bilan topshiring: mijoz vazifasi, va’dalar, o‘ziga xosliklar.",
+    "Ish boshlangach nazorat aloqasini belgilang, hammasi kelishilganday ketyaptimi, deb so‘rash uchun.",
+    "Rahmat ayting. Mijoz mamnun bo‘lsa, bu sizga foydali bo‘ladigan tanishlari yo‘qligini so‘rang. Bosimsiz."
+   ],
+   "call": "Assalomu alaykum, {имя}! Ishonchingiz uchun rahmat aytmoqchiman. Tasdiqlayman: biz [kelishuv] haqida kelishdik. Keyingi qadam: [qadam va muddat]. Hammasi to‘g‘rimi, biror narsani unutmadikmi?",
+   "msg": "{имя}, ishonchingiz uchun rahmat! Kelishuvlarni yozib qo‘yaman: [tarkib], [muddatlar], [mas’ul shaxs]. Biror joyi noto‘g‘ri yozilgan bo‘lsa, to‘g‘rilab qo‘ying. Savollar bo‘lsa, doim aloqadamiz. Hammasi to‘g‘rimi?"
+  },
+  "lost": {
+   "goal": "Rad etishning haqiqiy sababini bilish, kartochkaga yozish va yaxshi taassurot qoldirish, shunda sizga qaytishlari mumkin.",
+   "steps": [
+    "Bahslashmang va ko‘ndirmang. Javob uchun rahmat ayting.",
+    "Sababni bir marta so‘rang: narx, muddat, vazifa yo‘q, boshqasini tanladi, ishonch yo‘q. Mijoz javob bermoqchi bo‘lmasa, qistamang.",
+    "Sababni mijozning o‘z so‘zlari bilan kartochkadagi «rad etish sababi» maydoniga yozing: keyin nimani o‘zgartirish kerakligi ko‘rinadi.",
+    "Eshikni bitta xabar bilan ochiq qoldiring va mijoz so‘ramasa, boshqa yozmang. «Yozmang» degan odamlarga umuman yozmang. Mijoz qaytish muddatini o‘zi aytgan bo‘lsa, shu sanaga vazifa qo‘ying."
+   ],
+   "call": "{имя}, ochiq aytganingiz uchun rahmat. Nimani yaxshilashimizni tushunish uchun bitta savol bersam maylimi: asosiy sabab nima bo‘ldi? Javob bermasangiz ham, hech gap emas.",
+   "msg": "{имя}, vaqt ajratib, ochiq javob berganingiz uchun rahmat. Vazifa yana dolzarb bo‘lsa, aloqadamiz: {я}, {контакт}. Ishlaringizga omad! Agar sir bo‘lmasa, qarorga eng ko‘p nima ta’sir qildi?"
+  },
+  "objections": [
+   {"q": "Qimmat", "a": "Tushunaman, narx muhim. Nima bilan solishtiryapsiz: boshqa taklif bilanmi yoki rejalashtirgan byudjet bilanmi? Narx nimadan iboratligini birga ko‘rib chiqamiz va kichikroq hajmdan boshlash mumkinligini ko‘ramiz."},
+   {"q": "O‘ylab ko‘ramiz", "a": "Albatta, shoshilmang. Aynan nimani o‘ylab ko‘rmoqchisiz: narxnimi, muddatnimi yoki shartlarnimi? Ayting, men aynan shu bo‘yicha javob tayyorlayman, suhbatga esa o‘zingizga qulay kuni qaytamiz."},
+   {"q": "Telegram’ga (yoki WhatsApp’ga) tashlab yuboring", "a": "Albatta, bugun yuboraman. Ortiqcha narsa yubormaslik uchun so‘rayman: sizga nimani ko‘rish muhimroq, narxnimi, shartlarnimi yoki misollarnimi? Aynan shu haqda qisqacha yuboraman va hammasi tushunarli bo‘ldimi, deb so‘rayman."},
+   {"q": "Bizda doimiy yetkazib beruvchi bor", "a": "Yaxshi, demak bu masala siz uchun muhim. Hozirgi variantda nima qoniqtiradi va nimani yaxshilagan bo‘lardingiz? Hech narsani almashtirish shart emas: shartlarni shunchaki solishtirib, zaxira variant sifatida ko‘rishingiz mumkin."},
+   {"q": "Vaqtim yo‘q", "a": "Tushunaman, vaqt kam. Shuning uchun eng kam vaqt olaman: ikkita savol, keyin davom etish-etmasligini o‘zingiz hal qilasiz. Yoki messenjerda qisqa yozib qo‘yaman, vaqtingiz bo‘lganda javob berasiz. Sizga qaysi biri qulay?"},
+   {"q": "Keyinroq qo‘ng‘iroq qiling", "a": "Mayli, bezovta qilmayman. Aniq qachon qulay: bugun tushdan keyinmi yoki ertaga ertalabmi? Eslatma qo‘yib, o‘sha vaqtda qo‘ng‘iroq qilaman."},
+   {"q": "Taklifni (KP) yuboring", "a": "Albatta. Taklif aniq mos tushishi uchun ikkita narsani aniqlashim kerak: sizga aynan nima va qancha hajmda kerak hamda qarorni kim qabul qiladi. Javob bera olasizmi? Shundan keyin taklifni yuboraman va telefonda birga ko‘rib chiqamiz."},
+   {"q": "Bizga kerak emas", "a": "Tushundim, ochiq aytganingiz uchun rahmat. Bitta savol: bu vazifa sizda hozir qanday hal qilinadi? Hammasi qoniqtirsa, qistamayman, faqat sharoit o‘zgarsa, murojaat qilishingiz uchun kontaktimni qoldiraman."},
+   {"q": "Rahbar bilan maslahatlashishim kerak", "a": "Albatta, bunday qarorlar birgalikda qabul qilinadi. Sizningcha, rahbar birinchi bo‘lib nimani so‘raydi? Xohlasangiz, qisqa ma’lumot tayyorlayman yoki suhbatingizga qo‘shilib, uning savollariga javob beraman."},
+   {"q": "Sizlarni tanimaymiz", "a": "To‘g‘ri, ehtiyot bo‘lganingiz yaxshi: biz hali tanish emasmiz. Bizga ishonish uchun nimani bilish siz uchun muhim? Qanday ishlashimizni aytib beraman, savollaringizga javob beraman va katta majburiyatlarsiz kichik birinchi qadamni taklif qilaman."},
+   {"q": "Boshqalarda arzonroq", "a": "Aytganingiz uchun rahmat. Aynan nima arzonroq: yakuniy narxmi yoki alohida bandlarmi? Narxga nima kirishi, muddatlar va shartlarni band-band solishtiramiz: shunda takliflar bir xilmi yoki yo‘qmi, ko‘rinadi. Haqiqatan qimmatroq bo‘lsak, buni ochiq aytaman."},
+   {"q": "Hozir byudjet yo‘q", "a": "Tushunaman, byudjet har doim ham bo‘lmaydi. Rejangizga ko‘ra u qachon paydo bo‘lishi mumkin? Hozir qistamayman, o‘sha paytda suhbatga qaytaman, foydali materiallarni esa majburiyatsiz yuborishim mumkin."}
+  ]
+ }
+}

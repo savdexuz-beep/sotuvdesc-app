@@ -1,0 +1,519 @@
+.ob-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.ob-btn {
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  font-weight: 800;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: var(--bg);
+  color: var(--primary-700);
+}
+.ob-btn .ic {
+  margin-right: 8px;
+}
+.ob-btn.primary {
+  background: var(--primary);
+  color: #fff;
+}
+.ob-btn.primary:hover {
+  background: var(--primary-600);
+}
+.ob-btn.primary:active {
+  background: var(--primary-700);
+}
+.ob-btn.ghost {
+  border-color: var(--border-input);
+  background: var(--bg);
+  color: var(--primary-700);
+}
+.ob-btn.link {
+  background: none;
+  min-height: 44px;
+  padding: 0 12px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 700;
+  font-size: 15px;
+}
+.ob-btn.wide {
+  width: 100%;
+}
+.ob-btn:focus-visible,
+.ob-rc input:focus-visible + .ob-rcbody,
+.ck-head:focus-visible,
+.ck-item:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+.es-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px 16px 16px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.es-box.tight {
+  padding-top: 16px;
+}
+.es-ic {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--primary-50);
+  border: 1px solid var(--primary-100);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  margin-bottom: 12px;
+}
+.es-ic .ic {
+  width: 32px;
+  height: 32px;
+}
+.es-box h2 {
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  color: var(--heading);
+  line-height: 1.25;
+  margin: 0 0 12px;
+  text-wrap: balance;
+}
+.es-box p {
+  color: var(--text-2);
+  max-width: 30em;
+  margin: 0 0 12px;
+  text-wrap: pretty;
+}
+.es-box .ob-btn {
+  margin-top: 8px;
+  min-width: 220px;
+  max-width: 100%;
+}
+.es-load {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--muted);
+}
+#empty.es-wrap {
+  display: block;
+  overflow: auto;
+  padding: 0;
+}
+#cxMsgs .es-box {
+  padding-top: 24px;
+}
+.ob-solo #cxComp {
+  display: none;
+}
+.ck {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.ck-head {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: none;
+  text-align: left;
+  padding: 14px 16px 12px;
+  min-height: 44px;
+  cursor: pointer;
+}
+.ck-row1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ck-row1 b {
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--heading);
+  margin-right: 8px;
+}
+.ck-row1 span {
+  font-weight: 800;
+  color: var(--primary-700);
+  white-space: nowrap;
+}
+.ck-bar {
+  display: block;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--primary-100);
+  margin-top: 10px;
+  overflow: hidden;
+}
+.ck-bar i {
+  display: block;
+  height: 100%;
+  background: var(--primary);
+  border-radius: var(--radius-pill);
+  transition: width .25s;
+}
+.ck ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 8px;
+}
+.ck li {
+  margin: 0;
+  padding: 0;
+}
+.ck-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 56px;
+  border: 0;
+  background: none;
+  text-align: left;
+  padding: 8px;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.ck li.now .ck-item {
+  background: var(--primary-50);
+}
+.ck-tx {
+  flex: 1;
+  min-width: 0;
+  margin: 0 12px;
+}
+.ck-tx b {
+  display: block;
+  font-weight: 700;
+  color: var(--text);
+}
+.ck-tx small {
+  display: block;
+  color: var(--muted-2);
+  font-size: 14px;
+}
+.ck li.done .ck-tx b {
+  color: var(--muted);
+}
+.ck-chev {
+  color: var(--muted);
+  width: 20px;
+  height: 20px;
+}
+.ck-mark {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: 50%;
+  border: 2px solid var(--border-input);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ck li.done .ck-mark {
+  background: var(--success);
+  border-color: var(--success);
+  color: #fff;
+}
+.ck-mark .ic {
+  width: 18px;
+  height: 18px;
+}
+.ck-foot {
+  padding: 4px 8px 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+.ck.ok {
+  background: var(--success-bg);
+  border-color: var(--success-fill);
+  padding: 16px;
+}
+.ck.ok b {
+  display: block;
+  color: var(--success);
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.ck.ok p {
+  color: var(--text-2);
+  margin: 0 0 12px;
+}
+.ck.ok b .ic {
+  margin-right: 6px;
+}
+.ck-restore {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  min-height: 56px;
+  padding: 8px 14px;
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius);
+  background: var(--bg);
+  cursor: pointer;
+  margin: 8px 0;
+  color: var(--primary-700);
+}
+.ck-restore .ic {
+  margin-right: 12px;
+}
+.ck-restore b {
+  display: block;
+  font-weight: 800;
+}
+.ck-restore small {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--muted-2);
+}
+.ck-restore:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+.ob {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 35;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+.ob-in {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.ob-top {
+  flex: none;
+  min-height: var(--top);
+  padding: 0 8px 0 20px;
+  padding-top: env(safe-area-inset-top);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ob-st {
+  font-weight: 700;
+  color: var(--muted-2);
+  font-size: 14px;
+}
+.ob-dots {
+  flex: none;
+  display: flex;
+  padding: 0 20px 4px;
+}
+.ob-dots i {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--primary-100);
+  margin-right: 6px;
+}
+.ob-dots i:last-child {
+  margin-right: 0;
+}
+.ob-dots i.on {
+  background: var(--primary);
+}
+.ob-b {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.ob-b > * {
+  flex-shrink: 0;
+}
+.ob-b h1 {
+  font-size: var(--fs-h1);
+  font-weight: 800;
+  color: var(--heading);
+  line-height: 1.2;
+  margin: 0 0 12px;
+  text-wrap: balance;
+}
+.ob-b h1:focus {
+  outline: 0;
+}
+.ob-sub {
+  color: var(--text-2);
+  margin: 0 0 16px;
+  text-wrap: pretty;
+}
+.ob-f {
+  flex: none;
+  padding: 12px 20px;
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+.ob-f .ob-row {
+  display: flex;
+}
+.ob-f .ob-row .primary {
+  flex: 1;
+  margin-left: 8px;
+}
+.ob-f .ob-row2 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+fieldset.ob-fs {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.ob-rc {
+  position: relative;
+  display: block;
+  margin-bottom: 12px;
+}
+.ob-rc input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.ob-rcbody {
+  display: flex;
+  align-items: center;
+  min-height: 88px;
+  padding: 14px 16px;
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+}
+.ob-rc.on .ob-rcbody {
+  border-color: var(--primary);
+  background: var(--primary-50);
+  box-shadow: var(--ring);
+}
+.ob-rcbody > .ic {
+  width: 28px;
+  height: 28px;
+  color: var(--primary);
+  margin-right: 14px;
+}
+.ob-rcbody span.t {
+  flex: 1;
+  min-width: 0;
+}
+.ob-rcbody b {
+  display: block;
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--heading);
+}
+.ob-rcbody small {
+  display: block;
+  font-size: 14px;
+  color: var(--text-2);
+}
+.ob-tick {
+  margin-left: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border-input);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.ob-rc.on .ob-tick {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+.ob-tick .ic {
+  width: 16px;
+  height: 16px;
+}
+.ob-ben {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.ob-ben .es-ic {
+  width: 48px;
+  height: 48px;
+  margin: 0 14px 0 0;
+}
+.ob-ben .es-ic .ic {
+  width: 24px;
+  height: 24px;
+}
+.ob-ben b {
+  display: block;
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--heading);
+}
+.ob-ben p {
+  color: var(--text-2);
+  margin: 0;
+}
+.ob-hero {
+  align-items: center;
+  text-align: center;
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+}
+.ob-hero .es-ic {
+  width: 96px;
+  height: 96px;
+  margin-bottom: 20px;
+}
+.ob-hero .es-ic .ic {
+  width: 44px;
+  height: 44px;
+}
+.ob-hero p {
+  color: var(--text-2);
+  margin: 0;
+  max-width: 24em;
+  text-wrap: pretty;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ck-bar i {
+    transition: none;
+  }
+}
